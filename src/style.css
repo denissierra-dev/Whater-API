@@ -1,72 +1,82 @@
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+  overflow-x: hidden;
+  font-size: 16px;
 }
 
 :root {
-    /* colores principales */
-    --bg-gradient-start: #667eea;
-    --bg-gradient-end: #764ba2;
+  /* colores principales */
+  --bg-gradient-start: #667eea;
+  --bg-gradient-end: #764ba2;
 
-    /* colores de las targetas */
+  /* colores de las targetas */
+  --card-bg: rgba(255, 255, 255, 0.15);
+  --card-border: rgba(255, 255, 255, 0.3);
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.8);
 
-    --card-bg: rgba(255, 255, 255, 0.15);
-    --card-border: rgba(255, 255, 255, 0.3);
-    --text-primary: #ffffff;
-    --text-secundary: rgba(255, 255, 255, 0.8);
+  /* Sombras */
+  --shadow-light: 0 8px 32px rgba(0, 0, 0, 0.1);
+  --shadow-medium: 0 16px 64px rgba(0, 0, 0, 0.2);
 
-    /* Sombras */
-    --shadow-light: 0 8px 32px rgba(0, 0, 0, 0.1);
-    --shadow-medium: 0 16px 64px rgba(0, 0, 0, 0.2);
-
-    /* Espaciado*/
-
-    --spacing-sm: 10px;
-    --spacing-md: 20px;
-    --spacing-lg: 30px;
+  /* Espaciado fluido */
+  --spacing-sm: clamp(8px, 2vw, 10px);
+  --spacing-md: clamp(15px, 3vw, 20px);
+  --spacing-lg: clamp(20px, 4vw, 30px);
+  
+  /* Padding del contenedor */
+  --container-padding: clamp(10px, 3vw, 20px);
 }
 
 body {
-    min-height: 100vh;
-    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+  min-height: 100vh;
+  background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+  background-attachment: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: var(--container-padding);
+  overflow-x: hidden;
 }
 
 .container {
-    width: 100%;
-    max-width: 500px;
+  width: 100%;
+  max-width: min(500px, 100vw - (var(--container-padding) * 2));
 }
 
 .titulo {
-    text-align: center;
-    margin-bottom: var(--spacing-lg);
+  text-align: center;
+  margin-bottom: var(--spacing-lg);
 }
 
 .titulo h1 {
-    color: var(--text-primary);
-    font-size: 2.5rem;
-    font-weight: 700;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
-    letter-spacing: 1px;
+  color: var(--text-primary);
+  font-size: clamp(1.5rem, 5vw, 2.5rem);
+  font-weight: 700;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2);
+  letter-spacing: clamp(0.5px, 0.2vw, 1px);
 }
 
 form {
   display: flex;
-  gap: 10px;
+  flex-wrap: wrap;
+  gap: clamp(8px, 2vw, 10px);
   margin-bottom: var(--spacing-md);
 }
 
 #weather-input {
-  flex: 1;
-  padding: 15px 20px;
-  font-size: 1rem;
+  flex: 1 1 200px;
+  min-width: 0;
+  padding: clamp(12px, 3vw, 15px) clamp(16px, 4vw, 20px);
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
   border: none;
-  border-radius: 12px;
+  border-radius: clamp(10px, 2vw, 12px);
   background: rgba(255, 255, 255, 0.9);
   color: #333;
   box-shadow: var(--shadow-light);
@@ -81,22 +91,23 @@ form {
 }
 
 #weather-input::placeholder {
-    color: #999;
+  color: #999;
 }
 
 button {
-  padding: 15px 30px;
-  font-size: 1rem;
+  flex: 0 1 auto;
+  padding: clamp(12px, 3vw, 15px) clamp(20px, 5vw, 30px);
+  font-size: clamp(0.9rem, 2.5vw, 1rem);
   font-weight: 600;
-  border: none;
-  border-radius: 12px;
+  border: 1px solid var(--card-border);
+  border-radius: clamp(10px, 2vw, 12px);
   background: rgba(255, 255, 255, 0.25);
   backdrop-filter: blur(10px);
   color: var(--text-primary);
   cursor: pointer;
   box-shadow: var(--shadow-light);
   transition: all 0.3s ease;
-  border: 1px solid var(--card-border);
+  white-space: nowrap;
 }
 
 button:hover {
@@ -113,7 +124,7 @@ button:active {
   background: var(--card-bg);
   backdrop-filter: blur(10px);
   border: 1px solid var(--card-border);
-  border-radius: 20px;
+  border-radius: clamp(15px, 3vw, 20px);
   padding: var(--spacing-lg);
   box-shadow: var(--shadow-medium);
   text-align: center;
@@ -122,43 +133,43 @@ button:active {
 
 #weather-container h2 {
   color: var(--text-primary);
-  font-size: 2rem;
-  margin-bottom: 15px;
+  font-size: clamp(1.3rem, 4vw, 2rem);
+  margin-bottom: clamp(10px, 2vw, 15px);
   font-weight: 600;
 }
 
 #weather-container img {
-  width: 120px;
-  height: 120px;
+  width: clamp(80px, 20vw, 120px);
+  height: clamp(80px, 20vw, 120px);
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
 }
 
 .temp {
-  font-size: 3.5rem;
+  font-size: clamp(2rem, 8vw, 3.5rem);
   font-weight: 700;
   color: var(--text-primary);
-  margin: 10px 0;
+  margin: clamp(6px, 2vw, 10px) 0;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 .description {
-  font-size: 1.2rem;
+  font-size: clamp(0.95rem, 3vw, 1.2rem);
   color: var(--text-secondary);
   text-transform: capitalize;
-  margin-bottom: 20px;
+  margin-bottom: clamp(12px, 3vw, 20px);
 }
 
 #weather-container p {
   color: var(--text-secondary);
-  font-size: 1rem;
-  margin: 8px 0;
+  font-size: clamp(0.85rem, 2.5vw, 1rem);
+  margin: clamp(5px, 1.5vw, 8px) 0;
 }
 
 #forecast-container {
   background: var(--card-bg);
   backdrop-filter: blur(10px);
   border: 1px solid var(--card-border);
-  border-radius: 20px;
+  border-radius: clamp(15px, 3vw, 20px);
   padding: var(--spacing-lg);
   box-shadow: var(--shadow-medium);
   margin-bottom: var(--spacing-md);
@@ -166,20 +177,21 @@ button:active {
 
 #forecast-container h3 {
   color: var(--text-primary);
-  font-size: 1.5rem;
-  margin-bottom: 20px;
+  font-size: clamp(1.1rem, 3.5vw, 1.5rem);
+  margin-bottom: clamp(12px, 3vw, 20px);
   text-align: center;
   font-weight: 600;
 }
 
 .forecast-list {
   display: flex;
-  gap: 15px;
+  gap: clamp(8px, 2vw, 15px);
   overflow-x: auto;
-  padding-bottom: 10px;
+  padding-bottom: clamp(8px, 2vw, 10px);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) rgba(255, 255, 255, 0.1);
 }
 
-/* Ocultar scrollbar pero mantener funcionalidad */
 .forecast-list::-webkit-scrollbar {
   height: 6px;
 }
@@ -201,12 +213,13 @@ button:active {
 .forecast-card {
   background: rgba(255, 255, 255, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 15px;
-  padding: 20px;
-  min-width: 100px;
+  border-radius: clamp(12px, 2.5vw, 15px);
+  padding: clamp(12px, 3vw, 20px);
+  min-width: clamp(75px, 18vw, 100px);
   text-align: center;
   transition: all 0.3s ease;
   cursor: pointer;
+  flex-shrink: 0;
 }
 
 .forecast-card:hover {
@@ -218,20 +231,20 @@ button:active {
 .forecast-card .day {
   color: var(--text-primary);
   font-weight: 600;
-  font-size: 0.95rem;
-  margin-bottom: 10px;
+  font-size: clamp(0.8rem, 2vw, 0.95rem);
+  margin-bottom: clamp(6px, 2vw, 10px);
 }
 
 .forecast-card img {
-  width: 60px;
-  height: 60px;
-  margin: 10px 0;
+  width: clamp(45px, 12vw, 60px);
+  height: clamp(45px, 12vw, 60px);
+  margin: clamp(6px, 2vw, 10px) 0;
   filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
 }
 
 .forecast-card .temp {
   color: var(--text-primary);
-  font-size: 1.5rem;
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
   font-weight: 700;
   margin: 0;
 }
@@ -243,23 +256,23 @@ button:active {
   background: rgba(255, 255, 255, 0.1);
   backdrop-filter: blur(10px);
   border: 1px solid var(--card-border);
-  border-radius: 15px;
+  border-radius: clamp(12px, 2.5vw, 15px);
   margin-bottom: var(--spacing-md);
 }
 
 #loading p {
   color: var(--text-primary);
-  font-size: 1.2rem;
+  font-size: clamp(1rem, 3vw, 1.2rem);
   font-weight: 500;
   animation: pulse 1.5s ease-in-out infinite;
 }
 
 @keyframes pulse {
   0%, 100% {
-    opacity: 1;
+      opacity: 1;
   }
   50% {
-    opacity: 0.5;
+      opacity: 0.5;
   }
 }
 
@@ -268,7 +281,7 @@ button:active {
   background: rgba(255, 59, 48, 0.2);
   backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 59, 48, 0.4);
-  border-radius: 15px;
+  border-radius: clamp(12px, 2.5vw, 15px);
   padding: var(--spacing-md);
   margin-bottom: var(--spacing-md);
   text-align: center;
@@ -276,74 +289,12 @@ button:active {
 
 #error p {
   color: #fff;
-  font-size: 1.1rem;
+  font-size: clamp(0.95rem, 3vw, 1.1rem);
   font-weight: 500;
   margin: 0;
 }
 
-/* Responsive - Tablets */
-@media (max-width: 768px) {
-  .titulo h1 {
-    font-size: 2rem;
-  }
-  
-  #weather-container h2 {
-    font-size: 1.5rem;
-  }
-  
-  .temp {
-    font-size: 3rem;
-  }
-  
-  #weather-container img {
-    width: 100px;
-    height: 100px;
-  }
-}
-
-/* Responsive - Móviles */
-@media (max-width: 480px) {
-  body {
-    padding: 10px;
-  }
-  
-  .titulo h1 {
-    font-size: 1.8rem;
-  }
-  
-  form {
-    flex-direction: column;
-  }
-  
-  button {
-    width: 100%;
-  }
-  
-  #weather-container {
-    padding: 20px;
-  }
-  
-  .temp {
-    font-size: 2.5rem;
-  }
-  
-  .forecast-card {
-    min-width: 80px;
-    padding: 15px;
-  }
-  
-  .forecast-card img {
-    width: 50px;
-    height: 50px;
-  }
-  
-  .forecast-card .temp {
-    font-size: 1.2rem;
-  }
-}
-
-/* Animación de entrada para las tarjetas */
-/* SOLO esto del bonus (la animación de entrada) */
+/* Animación de entrada */
 #weather-container,
 #forecast-container {
   animation: fadeInUp 0.5s ease;
@@ -351,11 +302,44 @@ button:active {
 
 @keyframes fadeInUp {
   from {
-    opacity: 0;
-    transform: translateY(20px);
+      opacity: 0;
+      transform: translateY(20px);
   }
   to {
-    opacity: 1;
-    transform: translateY(0);
+      opacity: 1;
+      transform: translateY(0);
+  }
+}
+
+/* Optimización para pantallas táctiles - sin media query */
+@supports (hover: none) {
+  button,
+  .forecast-card,
+  #weather-input {
+      min-height: 44px;
+  }
+  
+  button:hover,
+  .forecast-card:hover {
+      transform: none;
+  }
+  
+  button:active {
+      transform: scale(0.98);
+  }
+  
+  .forecast-card:active {
+      transform: scale(0.95);
+  }
+}
+
+/* Reducción de movimiento para accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
   }
 }
